@@ -1,6 +1,8 @@
 open CeresSerialize
 open Datatypes
 open EAst
+open EEnvMap
+open Erasure0
 open Kernames
 open List0
 open Malfunction
@@ -16,7 +18,7 @@ val print_program :
   list * String.t
 
 val malfunction_pipeline :
-  (global_declarations, (Ident.t * t option) list, term, t, term, value)
+  (GlobalContextMap.t, (Ident.t * t option) list, term, t, term, value)
   Transform.Transform.t
 
 val box_to_ocaml : EAst.program -> String.t list * String.t

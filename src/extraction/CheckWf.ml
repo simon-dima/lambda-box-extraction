@@ -16,15 +16,15 @@ open ResultMonad
 open Bytestring
 open Monad_utils
 
-(** val agda_eflags : coq_EEnvFlags **)
+(** val metacoq_erasure_eflags : coq_EEnvFlags **)
 
-let agda_eflags =
-  { has_axioms = true; has_cstr_params = false; term_switches = { has_tBox =
-    true; has_tRel = true; has_tVar = true; has_tEvar = true; has_tLambda =
+let metacoq_erasure_eflags =
+  { has_axioms = true; has_cstr_params = true; term_switches = { has_tBox =
+    true; has_tRel = true; has_tVar = true; has_tEvar = false; has_tLambda =
     true; has_tLetIn = true; has_tApp = true; has_tConst = true;
-    has_tConstruct = true; has_tCase = true; has_tProj = false; has_tFix =
+    has_tConstruct = true; has_tCase = true; has_tProj = true; has_tFix =
     true; has_tCoFix = true; has_tPrim = all_primitive_flags;
-    has_tLazy_Force = true }; cstr_as_blocks = true }
+    has_tLazy_Force = true }; cstr_as_blocks = false }
 
 (** val agda_typed_eflags : coq_EEnvFlags **)
 

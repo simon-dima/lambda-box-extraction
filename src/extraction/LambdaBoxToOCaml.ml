@@ -1,6 +1,8 @@
 open CeresSerialize
 open Datatypes
 open EAst
+open EEnvMap
+open Erasure0
 open Kernames
 open List0
 open Malfunction
@@ -26,18 +28,22 @@ let print_program config nms p =
   let code = serialize p in (nms, code)
 
 (** val malfunction_pipeline :
-    (global_declarations, (Ident.t * t option) list, term, t, term, value)
+    (GlobalContextMap.t, (Ident.t * t option) list, term, t, term, value)
     Transform.Transform.t **)
 
 let malfunction_pipeline =
   Transform.Transform.compose
-    (post_verified_named_erasure_pipeline coq_CanonicalPointer
-      coq_CanonicalHeap)
+    (Transform.Transform.compose
+      (verified_lambdabox_pipeline fake_guard_impl)
+      (post_verified_named_erasure_pipeline coq_CanonicalPointer
+        coq_CanonicalHeap))
     (compile_to_malfunction coq_CanonicalPointer coq_CanonicalHeap)
 
 (** val box_to_ocaml : EAst.program -> String.t list * String.t **)
 
 let box_to_ocaml p =
   let nms = extract_names (snd p) in
-  let p0 = Transform.Transform.run malfunction_pipeline p in
-  print_program default_malfunction_config nms p0
+  let globalcontextmap = GlobalContextMap.make (fst p) in
+  let p0 = (globalcontextmap, (snd p)) in
+  let p1 = Transform.Transform.run malfunction_pipeline p0 in
+  print_program default_malfunction_config nms p1

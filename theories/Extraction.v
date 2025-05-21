@@ -81,7 +81,7 @@ Separate Extraction Translations.l_box_to_wasm CertiCoqPipeline.show_IR CertiCoq
                     Translations.l_box_to_ocaml
                     TypedTransforms.mk_params ErasurePipeline.implement_box
                     EvalBox.eval
-                    CheckWf.check_wf_program CheckWf.CheckWfExAst.check_wf_typed_program CheckWf.agda_eflags CheckWf.agda_typed_eflags
+                    CheckWf.check_wf_program CheckWf.CheckWfExAst.check_wf_typed_program CheckWf.metacoq_erasure_eflags CheckWf.agda_typed_eflags
                     Serialize.program_of_string Serialize.global_env_of_string Serialize.kername_of_string Serialize.string_of_error
                     Floats.Float32.to_bits Floats.Float.to_bits
                     Floats.Float32.of_bits Floats.Float.of_bits

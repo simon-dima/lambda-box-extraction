@@ -26,19 +26,25 @@ Definition print_program config nms p :=
 Local Existing Instance CanonicalHeap.
 Local Existing Instance CanonicalPointer.
 
+From MetaCoq.ErasurePlugin Require Import Erasure.
+From MetaCoq.Common Require Import EnvMap.
+
 Program Definition malfunction_pipeline :
   Transform.t _ _ _ _ _ _ _ _ :=
+  verified_lambdabox_pipeline ▷
   post_verified_named_erasure_pipeline ▷
   compile_to_malfunction.
 Next Obligation.
   intuition auto; destruct H; intuition eauto.
 Qed.
 
-
 Axiom trust_coq_kernel : forall p, pre malfunction_pipeline p.
+Axiom global_names_unique : forall (g: EAst.global_declarations) , EnvMap.fresh_globals g.
 
 Definition box_to_ocaml (p : EAst.program) :=
   let config := default_malfunction_config in (* TODO: handle constructor reordering *)
   let nms := extract_names (snd p) in
+  let globalcontextmap := EEnvMap.GlobalContextMap.make (fst p) (global_names_unique (fst p)) in
+  let p := (globalcontextmap, snd p) in
   let p := run malfunction_pipeline p (trust_coq_kernel p) in
   print_program config nms p.

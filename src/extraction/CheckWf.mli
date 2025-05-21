@@ -16,7 +16,7 @@ open ResultMonad
 open Bytestring
 open Monad_utils
 
-val agda_eflags : coq_EEnvFlags
+val metacoq_erasure_eflags : coq_EEnvFlags
 
 val agda_typed_eflags : coq_EEnvFlags
 
