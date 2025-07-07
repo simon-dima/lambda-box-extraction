@@ -17,6 +17,14 @@ val print_program :
   malfunction_pipeline_config -> String.t list -> program -> String.t
   list * String.t
 
+val unbox : bool
+
+val unsafe_passes_cfg : unsafe_passes
+
+val erasure_cfg : erasure_configuration
+
+val malfunction_cfg : malfunction_pipeline_config
+
 val malfunction_pipeline :
   (GlobalContextMap.t, (Ident.t * t option) list, term, t, term, value)
   Transform.Transform.t

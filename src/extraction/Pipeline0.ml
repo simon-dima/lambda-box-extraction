@@ -429,8 +429,3 @@ let post_verified_named_erasure_pipeline h h0 =
   Transform.Transform.compose
     (Transform.Transform.compose (enforce_extraction_conditions h h h0)
       implement_box_transformation) name_annotation
-
-(** val default_malfunction_config : malfunction_pipeline_config **)
-
-let default_malfunction_config =
-  { erasure_config = safe_erasure_config; reorder_cstrs = []; prims = [] }

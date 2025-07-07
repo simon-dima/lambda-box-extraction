@@ -63,5 +63,3 @@ val compile_to_malfunction :
 val post_verified_named_erasure_pipeline :
   coq_Pointer -> coq_Heap -> (global_declarations, global_declarations, term,
   term, term, EWcbvEvalNamed.value) Transform.Transform.t
-
-val default_malfunction_config : malfunction_pipeline_config

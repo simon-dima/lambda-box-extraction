@@ -35,15 +35,9 @@ type erasure_configuration = { enable_unsafe : unsafe_passes;
 
 val default_dearging_config : dearging_config
 
-val make_unsafe_passes : bool -> unsafe_passes
-
-val no_unsafe_passes : unsafe_passes
-
 val default_unsafe_passes : unsafe_passes
 
 val default_erasure_config : erasure_configuration
-
-val safe_erasure_config : erasure_configuration
 
 val eta_expand :
   (GlobalEnvMap.t, Env.global_env, Ast0.term, Ast0.term, Ast0.term,

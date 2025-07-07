@@ -39,16 +39,6 @@ let default_dearging_config =
   { overridden_masks = (fun _ -> None); do_trim_const_masks = true;
     do_trim_ctor_masks = false }
 
-(** val make_unsafe_passes : bool -> unsafe_passes **)
-
-let make_unsafe_passes b =
-  { cofix_to_lazy = b; inlining = b; unboxing = b; betared = b }
-
-(** val no_unsafe_passes : unsafe_passes **)
-
-let no_unsafe_passes =
-  make_unsafe_passes false
-
 (** val default_unsafe_passes : unsafe_passes **)
 
 let default_unsafe_passes =
@@ -58,13 +48,6 @@ let default_unsafe_passes =
 
 let default_erasure_config =
   { enable_unsafe = default_unsafe_passes; enable_typed_erasure = true;
-    dearging_config = default_dearging_config; inlined_constants =
-    KernameSet.empty }
-
-(** val safe_erasure_config : erasure_configuration **)
-
-let safe_erasure_config =
-  { enable_unsafe = no_unsafe_passes; enable_typed_erasure = false;
     dearging_config = default_dearging_config; inlined_constants =
     KernameSet.empty }
 
